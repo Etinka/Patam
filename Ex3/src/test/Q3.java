@@ -9,13 +9,29 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Q3 {
     public static double calc(String expression) {
         Queue<Object> queue = getQueue(expression);
-        System.out.println("test: " + queue.peek() );
-        double result = 0;
+        Stack<Double> stack = new Stack<>();
         while (!queue.isEmpty()) {
-            System.out.print(queue.remove() + " ");
+            if (queue.peek() instanceof Double) {
+                stack.push((Double) queue.remove());
+            } else if (queue.peek() instanceof Character) {
+                char c = (char) queue.remove();
+                double right = stack.pop();
+                double left = stack.pop();
+                BinaryExpression binaryExpression;
+                if (c == '/') {
+                    binaryExpression = new Div(new Number(left), new Number(right));
+                } else if (c == '*') {
+                    binaryExpression = new Mul(new Number(left), new Number(right));
+                } else if (c == '+') {
+                    binaryExpression = new Plus(new Number(left), new Number(right));
+                } else  {
+                    binaryExpression = new Minus(new Number(left), new Number(right));
+                }
+
+                stack.push(binaryExpression.calculate());
+            }
         }
-        System.out.println();
-        return result;
+        return stack.pop();
     }
 
     private static Queue<Object> getQueue(String expression) {

@@ -8,6 +8,7 @@ public class Minus extends BinaryExpression {
 
     @Override
     public double calculate() {
-        return left.calculate() - right.calculate();
+        double val = left.calculate() - right.calculate();
+        return Math.round(val * 100000d) / 100000d;
     }
 }
