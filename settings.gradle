@@ -1,0 +1,3 @@
+include 'Ex6'
+findProject(':Ex6')?.name = 'ex6'
+
