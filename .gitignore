@@ -1,2 +1,6 @@
 .idea/
-gradle.xml
+.gradle/
+Ex6/src/main/resources/
+Ex6/src/test/resources/
+src/main/
+src/test/
